@@ -4,7 +4,7 @@ import { SearchIcon } from "@chakra-ui/icons";
 
 export default function Search() {
 	return (
-		<InputGroup maxW="sm">
+		<InputGroup width={["90%", "sm"]}>
 			<InputLeftElement children={<SearchIcon color="gray.800" />} />
 			<Input
 				type="text"
