@@ -1,36 +1,38 @@
 import React from "react";
-import {
-	Heading,
-	Box,
-	Flex,
-	Image,
-	Text,
-	Card,
-	Button,
-} from "@chakra-ui/react";
-import Navbar from "../common/Navbar";
-import BuyArticleCard from "./BuyArticleCard";
+import { Heading, Box, Flex, Image, Text } from "@chakra-ui/react";
 
-export default function ArticleDetail() {
+export default function ArticleDetail({
+	title,
+	author,
+	abstract,
+	published,
+	imageSrc,
+	imageAlt,
+}) {
+	console.log("data", author, published);
+
 	return (
 		<Box width={["full", "full", "full", "65%"]}>
-			<Heading fontSize={"4xl"} marginBottom="1">
-				Title
+			<Heading fontSize={"4xl"} marginBottom="3">
+				{title}
 			</Heading>
-			<Flex marginBottom={"8"}>
-				<Text color="gray.800">author name</Text>
-				<Text mx="3" color={"gray.400"}>
+			<Flex marginBottom={"6"}>
+				<Text color="gray.800">{author}</Text>
+				<Text mx="3" color={"facebook.400"}>
 					&#x2022;
 				</Text>
-				<Text color="gray.800">12 april 2021</Text>
+				<Text color="gray.800">{published}</Text>
 			</Flex>
-			<Image
-				src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
-				width="full"
-				height={["50%", "500px"]}
-				objectFit={"cover"}
-			/>
-			<Text my={8}>abstract</Text>
+			<Flex justifyContent={"center"}>
+				<Image
+					src={imageSrc}
+					alt={imageAlt}
+					width="fit-content"
+					height={"fit-content"}
+					objectFit={"cover"}
+				/>
+			</Flex>
+			<Text my={8}>{abstract}</Text>
 		</Box>
 	);
 }
