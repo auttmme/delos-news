@@ -35,7 +35,7 @@ export default function Navbar({ children }) {
 			py={[2, 5]}
 			borderBottom="1px"
 			borderColor="gray.300"
-			justifyContent="space-between"
+			justifyContent={["flex-start", "space-between"]}
 			alignItems="center"
 		>
 			<IconButton
@@ -46,11 +46,16 @@ export default function Navbar({ children }) {
 				icon={<HamburgerIcon size="lg" />}
 				onClick={onOpen}
 			/>
-			<Drawer size={"full"} isOpen={isOpen} onClose={onClose} placement="left">
+			<Drawer
+				size={["full"]}
+				isOpen={isOpen}
+				onClose={onClose}
+				placement="left"
+			>
 				<DrawerOverlay />
 				<DrawerContent>
-					<DrawerCloseButton size="lg" />
-					<DrawerBody textAlign={"center"}>
+					<DrawerCloseButton marginTop={3} size="lg" />
+					<DrawerBody paddingTop={5} textAlign={"center"}>
 						<Search />
 						<Link href="/myArticle">
 							<Text
@@ -76,14 +81,16 @@ export default function Navbar({ children }) {
 				</DrawerContent>
 			</Drawer>
 
-			<Link href="/">
-				<Image
-					src="/delosNews.png"
-					alt="delos news logo"
-					width="180"
-					height="40"
-				/>
-			</Link>
+			<Flex alignSelf={"center"}>
+				<Link href="/">
+					<Image
+						src="/delosNews.png"
+						alt="delos news logo"
+						width="180"
+						height="40"
+					/>
+				</Link>
+			</Flex>
 
 			<Box
 				display={{ base: "none", lg: "flex" }}
