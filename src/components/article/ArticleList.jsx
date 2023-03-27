@@ -12,44 +12,61 @@ import {
 
 import NextLink from "next/link";
 
-export default function ArticleList() {
+export default function ArticleList({ mostPopular }) {
+	mostPopular = mostPopular.results;
+	console.log(mostPopular);
+
 	return (
 		<Box width={"full"}>
-			<NextLink href="/detail">
-				<Card
-					direction={{ base: "column", sm: "row" }}
-					overflow="hidden"
-					variant="outline"
-					paddingTop="10"
-					paddingBottom={[0, 10]}
-					border="0"
-					borderBottom="1px"
-					borderBottomColor="gray.300"
-					borderRadius="0"
+			{mostPopular.map((art) => (
+				<NextLink
+					href={{
+						pathname: `/article/${art.id}`,
+						query: {
+							title: art.title,
+							author: art.byline,
+							abstract: art.abstract,
+							published: art.published_date,
+							src: art.media[0]["media-metadata"][2].url,
+							alt: art.caption,
+						},
+					}}
 				>
-					<Image
-						objectFit="cover"
-						maxW={{ base: "100%", sm: "200px" }}
-						src="https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
-						alt="Caffe Latte"
-					/>
-
-					<Stack>
-						<CardBody paddingLeft={[0, 10]}>
-							<Heading as="h1" size="xl">
-								The perfect latte
-							</Heading>
-							<Flex py="2">
-								<Text color="gray.600">author</Text>
-								<Text mx="1" color={"gray.400"}>
-									&#x2022;
-								</Text>
-								<Text color="gray.600">12 april 2021</Text>
-							</Flex>
-						</CardBody>
-					</Stack>
-				</Card>
-			</NextLink>
+					<Card
+						direction={{ base: "column", sm: "row" }}
+						overflow="hidden"
+						variant="outline"
+						paddingTop="10"
+						paddingBottom={[0, 10]}
+						border="0"
+						borderBottom="1px"
+						borderBottomColor="gray.300"
+						borderRadius="0"
+					>
+						{/* prettier-ignore */}
+						<Image
+							objectFit="cover"
+							maxW={{ base: "100%", sm: "200px" }}
+							src={art.media[0]["media-metadata"][2].url}
+							alt={art.caption}
+						/>
+						<Stack>
+							<CardBody paddingLeft={[0, 10]}>
+								<Heading as="h1" size="lg">
+									{art.title}
+								</Heading>
+								<Flex py="2">
+									<Text color="gray.600">{art.byline}</Text>
+									<Text mx="3" color={"facebook.400"}>
+										&#x2022;
+									</Text>
+									<Text color="gray.600">{art.published_date}</Text>
+								</Flex>
+							</CardBody>
+						</Stack>
+					</Card>
+				</NextLink>
+			))}
 		</Box>
 	);
 }
