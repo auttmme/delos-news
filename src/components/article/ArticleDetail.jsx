@@ -1,5 +1,8 @@
 import React from "react";
 import { Heading, Box, Flex, Image, Text } from "@chakra-ui/react";
+import { ArrowForwardIcon } from "@chakra-ui/icons";
+
+import Link from "next/link";
 
 export default function ArticleDetail({
 	title,
@@ -8,6 +11,7 @@ export default function ArticleDetail({
 	published,
 	imageSrc,
 	imageAlt,
+	url,
 }) {
 	console.log("data", author, published);
 
@@ -33,6 +37,14 @@ export default function ArticleDetail({
 				/>
 			</Flex>
 			<Text my={8}>{abstract}</Text>
+			<Link href={url}>
+				<Flex alignItems={"center"}>
+					<Text color="blue.800" fontSize={"xl"} fontWeight={"semibold"}>
+						Read More
+					</Text>
+					<ArrowForwardIcon marginLeft={3} boxSize={6} color="blue.800" />
+				</Flex>
+			</Link>
 		</Box>
 	);
 }
