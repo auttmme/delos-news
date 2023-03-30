@@ -12,7 +12,7 @@ import {
 	useDisclosure,
 } from "@chakra-ui/react";
 import { BiUser } from "react-icons/bi";
-import Search from "../home/search";
+import Search from "../search/Search";
 import {
 	Popover,
 	PopoverTrigger,
