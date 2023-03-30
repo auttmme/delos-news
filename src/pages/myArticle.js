@@ -19,7 +19,6 @@ export default function myArticle() {
 				>
 					My Article
 				</Text>
-				<ArticleList />
 			</Box>
 		</Layout>
 	);

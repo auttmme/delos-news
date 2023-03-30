@@ -16,6 +16,7 @@ function Details() {
 	const published = query.published;
 	const imageSrc = query.src;
 	const imageAlt = query.alt;
+	const url = query.url;
 
 	return (
 		<Layout>
@@ -30,8 +31,9 @@ function Details() {
 					published={published}
 					imageSrc={imageSrc}
 					imageAlt={imageAlt}
+					url={url}
 				/>
-				<BuyArticleCard />
+				<BuyArticleCard published={published} />
 			</Flex>
 		</Layout>
 	);
