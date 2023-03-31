@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
 	Box,
 	Drawer,
@@ -28,6 +28,15 @@ import { HamburgerIcon } from "@chakra-ui/icons";
 
 export default function Navbar({ children }) {
 	const { isOpen, onOpen, onClose } = useDisclosure();
+	const [currency, setCurrency] = useState("");
+
+	const getCurrency = () => {
+		setCurrency(localStorage.getItem("currency"));
+	};
+
+	useEffect(() => {
+		getCurrency();
+	}, [currency]);
 
 	return (
 		<Flex
@@ -121,7 +130,7 @@ export default function Navbar({ children }) {
 							<PopoverCloseButton />
 							<PopoverHeader>Balance</PopoverHeader>
 							<PopoverBody fontSize={"xl"} fontWeight={"bold"}>
-								100.000 coins
+								{currency} coins
 							</PopoverBody>
 						</PopoverContent>
 					</Popover>
