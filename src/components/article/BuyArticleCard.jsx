@@ -55,8 +55,13 @@ export default function BuyArticleCard({ url, published }) {
 					return;
 				}
 			}
+			if (articlePrice === "50000") {
+				localStorage.setItem("ticket", "3");
+				alert("you get 3 lucky draw tickets, please see on lucky draw page");
+			}
 			articles = [...articles, { url, price: articlePrice }];
 			localStorage.setItem("articles", JSON.stringify(articles));
+			setIsDisabled(true);
 		}
 	};
 
@@ -78,7 +83,7 @@ export default function BuyArticleCard({ url, published }) {
 			padding="4"
 			width={["full", "full", "full", "25%"]}
 			height="fit-content"
-			marginTop={[0, 0, 0, "20"]}
+			marginTop={["10", 0, 0, "20"]}
 		>
 			<Text fontSize={"xl"} align="center">
 				Buy this article to get full access
