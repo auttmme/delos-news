@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable react/jsx-key */
+import React, { useEffect, useMemo, useState } from "react";
 import {
 	Card,
 	Image,
@@ -12,7 +13,7 @@ import {
 
 import NextLink from "next/link";
 
-export default function ArticleList({ viewed, shared, emailed }) {
+export default function ArticleList({ viewed, shared, emailed, category }) {
 	// console.log("viewed", viewed.results);
 	// console.log("shared", shared.results);
 	// console.log("emailed", emailed.results);
@@ -22,12 +23,31 @@ export default function ArticleList({ viewed, shared, emailed }) {
 	const [mostShared, setMostShared] = useState([]);
 	const [mostEmailed, setMostEmailed] = useState([]);
 
+	const selectedArticle = useMemo(() => {
+		console.log("icha", category);
+		if (category.includes("all") && category.length === 4) {
+			return allArticles;
+		}
+		let temp = [];
+		if (category.includes("most viewed")) {
+			temp = [...temp, ...mostViewed];
+		}
+		if (category.includes("most shared")) {
+			temp = [...temp, ...mostShared];
+		}
+		if (category.includes("most emailed")) {
+			temp = [...temp, ...mostEmailed];
+		}
+		console.log("icha", temp);
+		return temp;
+	}, [allArticles, category, mostEmailed, mostShared, mostViewed]);
+
 	useEffect(() => {
 		setMostViewed(viewed?.results);
 		setMostShared(shared?.results);
 		setMostEmailed(emailed?.results);
-		setAllArticles(viewed?.results.concat(shared?.results, emailed?.results));
-	}, []);
+		setAllArticles(viewed?.results?.concat(shared?.results, emailed?.results));
+	}, [emailed?.results, shared?.results, viewed?.results]);
 
 	console.log("viewed", mostViewed);
 	console.log("shared", mostShared);
@@ -36,7 +56,7 @@ export default function ArticleList({ viewed, shared, emailed }) {
 
 	return (
 		<Box width={"full"}>
-			{allArticles?.map((art) => (
+			{selectedArticle?.map((art) => (
 				<NextLink
 					href={{
 						pathname: `/article/${art?.id}`,
