@@ -1,6 +1,6 @@
 import Layout from "@/components/common/Layout";
-import { Flex, Box, Text } from "@chakra-ui/react";
-import { useState } from "react";
+import { Flex } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import ArticleList from "src/components/article/ArticleList";
 import Filter from "src/components/home/Filter";
 
@@ -11,11 +11,29 @@ function Home({ viewed, shared, emailed }) {
 		setCategory(category);
 	};
 
+	const initLocalStorage = () => {
+		if (localStorage.getItem("currency") === null) {
+			localStorage.setItem("currency", "50000");
+		}
+		if (localStorage.getItem("articles") === null) {
+			localStorage.setItem("articles", JSON.stringify([]));
+		}
+	};
+
+	useEffect(() => {
+		initLocalStorage();
+	}, []);
+
 	return (
 		<Layout>
 			<Filter onCategory={handleCategory} />
 			<Flex justifyContent="center">
-				<ArticleList viewed={viewed} shared={shared} emailed={emailed} />
+				<ArticleList
+					viewed={viewed}
+					shared={shared}
+					emailed={emailed}
+					category={category}
+				/>
 			</Flex>
 		</Layout>
 	);
