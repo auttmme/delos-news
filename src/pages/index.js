@@ -18,6 +18,9 @@ function Home({ viewed, shared, emailed }) {
 		if (localStorage.getItem("articles") === null) {
 			localStorage.setItem("articles", JSON.stringify([]));
 		}
+		if (localStorage.getItem("ticket") === null) {
+			localStorage.setItem("ticket", "0");
+		}
 	};
 
 	useEffect(() => {
