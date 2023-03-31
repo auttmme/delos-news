@@ -20,13 +20,13 @@ export default function SearchItem({ data }) {
 				href={{
 					pathname: `/article/${data.id}`,
 					query: {
-						title: data.title,
-						author: data.byline,
-						abstract: data.abstract,
-						published: data.published_date,
+						title: data?.title,
+						author: data?.byline,
+						abstract: data?.abstract,
+						published: data?.published_date,
 						src: data?.media?.[0]?.["media-metadata"][2].url,
-						alt: data.caption,
-						url: data.url,
+						alt: data?.caption,
+						url: data?.url,
 					},
 				}}
 			>
