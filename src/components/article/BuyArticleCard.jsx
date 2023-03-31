@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Text, Card, Button } from "@chakra-ui/react";
 
-export default function BuyArticleCard({ published }) {
+export default function BuyArticleCard({ url, published }) {
 	const [articlePrice, setArticlePrice] = useState("");
+	const [isDisabled, setIsDisabled] = useState(false);
 
-	const getArticlePrice = () => {
+	const getArticlePrice = useCallback(() => {
 		const moreThanSevenDays = "0";
-		const sevenDays = "20.000";
-		const oneDay = "50.000";
+		const sevenDays = "20000";
+		const oneDay = "50000";
 
 		const publicationDate = new Date(published);
 		const currentDate = new Date();
@@ -29,11 +30,45 @@ export default function BuyArticleCard({ published }) {
 
 		console.log(price);
 		return setArticlePrice(price);
+	}, [published]);
+
+	const buyArticle = () => {
+		let currency = parseInt(localStorage.getItem("currency"));
+		let articles = JSON.parse(localStorage.getItem("articles"));
+
+		if (currency < articlePrice) {
+			alert("saldo tidak cukup");
+			return;
+		}
+		if (currency >= articlePrice) {
+			currency = currency - articlePrice;
+			localStorage.setItem("currency", currency.toString());
+			if (articlePrice === "0") {
+				let count = 0;
+				articles.forEach((a) => {
+					if (a.price === "0") {
+						count += 1;
+					}
+				});
+				if (count === 5) {
+					alert("reached maximum free articles");
+					return;
+				}
+			}
+			articles = [...articles, { url, price: articlePrice }];
+			localStorage.setItem("articles", JSON.stringify(articles));
+		}
 	};
 
 	useEffect(() => {
 		getArticlePrice();
-	}, []);
+		let articles = JSON.parse(localStorage.getItem("articles"));
+
+		if (articles.find((e) => e.url === url)) {
+			console.log("disable");
+			setIsDisabled(true);
+		}
+	}, [getArticlePrice, url]);
 
 	return (
 		<Card
@@ -51,7 +86,13 @@ export default function BuyArticleCard({ published }) {
 			<Text align={"center"} fontSize="2xl" fontWeight={"semibold"} my={5}>
 				{articlePrice} coins
 			</Text>
-			<Button colorScheme={"facebook"}>Buy Now</Button>
+			<Button
+				colorScheme={"facebook"}
+				onClick={buyArticle}
+				isDisabled={isDisabled}
+			>
+				Buy Now
+			</Button>
 		</Card>
 	);
 }
