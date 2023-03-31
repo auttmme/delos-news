@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import Layout from "@/components/common/Layout";
 import SearchItem from "@/components/search/SearchItem";
 import { Text } from "@chakra-ui/react";
@@ -13,7 +14,7 @@ function SearchPage({ viewed, shared, emailed }) {
 
 	useEffect(() => {
 		setAllArticles(viewed.results.concat(shared.results, emailed.results));
-	}, []);
+	}, [emailed.results, shared.results, viewed.results]);
 
 	console.log(allArticles);
 
