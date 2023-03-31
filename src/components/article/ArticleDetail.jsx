@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Heading, Box, Flex, Image, Text } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 
@@ -14,6 +14,16 @@ export default function ArticleDetail({
 	url,
 }) {
 	console.log("data", author, published);
+
+	const [isBought, setIsBought] = useState(false);
+
+	useEffect(() => {
+		let articles = JSON.parse(localStorage.getItem("articles"));
+
+		if (articles.find((e) => e.url === url)) {
+			setIsBought(true);
+		}
+	}, [setIsBought, url]);
 
 	return (
 		<Box width={["full", "full", "full", "65%"]}>
@@ -38,12 +48,16 @@ export default function ArticleDetail({
 			</Flex>
 			<Text my={8}>{abstract}</Text>
 			<Link href={url}>
-				<Flex alignItems={"center"}>
-					<Text color="blue.800" fontSize={"xl"} fontWeight={"semibold"}>
-						Read More
-					</Text>
-					<ArrowForwardIcon marginLeft={3} boxSize={6} color="blue.800" />
-				</Flex>
+				{isBought ? (
+					<Flex alignItems={"center"}>
+						<Text color="blue.800" fontSize={"xl"} fontWeight={"semibold"}>
+							Read More
+						</Text>
+						<ArrowForwardIcon marginLeft={3} boxSize={6} color="blue.800" />
+					</Flex>
+				) : (
+					""
+				)}
 			</Link>
 		</Box>
 	);
