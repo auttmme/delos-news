@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import {
 	Menu,
 	MenuButton,
@@ -11,18 +11,42 @@ import {
 import { ChevronDownIcon } from "@chakra-ui/icons";
 
 export default function Filter({ onCategory }) {
-	const [checkedItems, setCheckedItems] = useState([true, true, true]);
+	const [category, setCategory] = useState([
+		"all",
+		"most viewed",
+		"most shared",
+		"most emailed",
+	]);
 
-	const allChecked = checkedItems.every(Boolean);
-	const isIndeterminate = checkedItems.some(Boolean) && !allChecked;
+	const isIndeterminate = useMemo(
+		() => category.length > 0 && category.length < 4,
+		[category]
+	);
 
-	const [category, setCategory] = useState([]);
+	useEffect(() => {
+		console.log("category useef", category);
+		onCategory(category);
+	}, [category, onCategory]);
 
-	const sendCategory = () => {
-		onCategory();
+	const handleChange = (a) => {
+		if (a.includes("all") && a.length === 1) {
+			setCategory([]);
+			return;
+		}
+		if (!a.includes("all") && a.length === 3) {
+			setCategory(["all", "most viewed", "most shared", "most emailed"]);
+			return;
+		}
+		setCategory(a);
 	};
 
-	console.log("value", category);
+	const allChange = () => {
+		if (category.includes("all")) {
+			setCategory([]);
+		} else {
+			setCategory(["all", "most viewed", "most shared", "most emailed"]);
+		}
+	};
 
 	return (
 		<Menu>
@@ -30,60 +54,22 @@ export default function Filter({ onCategory }) {
 				Filter
 			</MenuButton>
 			<MenuList padding={4}>
-				<CheckboxGroup colorScheme={"facebook"}>
+				<CheckboxGroup
+					colorScheme={"facebook"}
+					onChange={handleChange}
+					value={category}
+				>
 					<Stack>
 						<Checkbox
-							defaultChecked
-							isChecked={allChecked}
 							value="all"
 							isIndeterminate={isIndeterminate}
-							onChange={(e) => {
-								setCheckedItems([
-									e.target.checked,
-									e.target.checked,
-									e.target.checked,
-								]);
-								setCategory(e.target.value);
-							}}
+							onChange={allChange}
 						>
 							All
 						</Checkbox>
-						<Checkbox
-							isChecked={checkedItems[0]}
-							onChange={(e) =>
-								setCheckedItems([
-									e.target.checked,
-									checkedItems[1],
-									checkedItems[2],
-								])
-							}
-						>
-							Most Viewed
-						</Checkbox>
-						<Checkbox
-							isChecked={checkedItems[1]}
-							onChange={(e) =>
-								setCheckedItems([
-									checkedItems[0],
-									e.target.checked,
-									checkedItems[2],
-								])
-							}
-						>
-							Most Shared
-						</Checkbox>
-						<Checkbox
-							isChecked={checkedItems[2]}
-							onChange={(e) =>
-								setCheckedItems([
-									checkedItems[0],
-									checkedItems[1],
-									e.target.checked,
-								])
-							}
-						>
-							Most Emailed
-						</Checkbox>
+						<Checkbox value="most viewed">Most Viewed</Checkbox>
+						<Checkbox value="most shared">Most Shared</Checkbox>
+						<Checkbox value="most emailed">Most Emailed</Checkbox>
 					</Stack>
 				</CheckboxGroup>
 			</MenuList>
