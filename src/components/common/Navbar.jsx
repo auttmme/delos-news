@@ -44,7 +44,8 @@ export default function Navbar({ children }) {
 			py={[2, 5]}
 			borderBottom="1px"
 			borderColor="gray.300"
-			justifyContent={["flex-start", "space-between"]}
+			justifyContent={"space-between"}
+			width="full"
 			alignItems="center"
 		>
 			<IconButton
@@ -90,7 +91,7 @@ export default function Navbar({ children }) {
 				</DrawerContent>
 			</Drawer>
 
-			<Flex alignSelf={"center"}>
+			<Flex>
 				<Link href="/">
 					<Image
 						src="/delosNews.png"
