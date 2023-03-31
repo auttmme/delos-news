@@ -33,7 +33,7 @@ function Details() {
 					imageAlt={imageAlt}
 					url={url}
 				/>
-				<BuyArticleCard published={published} />
+				<BuyArticleCard url={url} published={published} />
 			</Flex>
 		</Layout>
 	);
