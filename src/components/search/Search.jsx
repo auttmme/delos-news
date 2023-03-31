@@ -23,7 +23,9 @@ export default function Search() {
 
 	return (
 		<InputGroup width={{ base: "90%", lg: "sm" }}>
-			<InputLeftElement children={<SearchIcon color="gray.800" />} />
+			<InputLeftElement>
+				<SearchIcon color="gray.800" />
+			</InputLeftElement>
 			<Input
 				type="text"
 				placeholder="search"
