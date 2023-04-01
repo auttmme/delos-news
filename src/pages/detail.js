@@ -2,7 +2,7 @@ import BuyArticleCard from "@/components/article/BuyArticleCard";
 import Layout from "@/components/common/Layout";
 import { Flex } from "@chakra-ui/react";
 import React from "react";
-import ArticleDetail from "src/components/article/ArticleDetail";
+import ArticleDetail from "@/components/article/ArticleDetail";
 
 export default function detail() {
 	return (

@@ -1,8 +1,8 @@
 import Layout from "@/components/common/Layout";
 import { Flex, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import ArticleList from "src/components/article/ArticleList";
-import Filter from "src/components/home/Filter";
+import ArticleList from "@/components/article/ArticleList";
+import Filter from "@/components/home/Filter";
 
 function Home({ viewed, shared, emailed }) {
 	const [category, setCategory] = useState([]);
@@ -33,6 +33,7 @@ function Home({ viewed, shared, emailed }) {
 			<Flex justifyContent="center">
 				{viewed && shared && emailed ? (
 					<ArticleList
+						data-testid="article-list"
 						viewed={viewed}
 						shared={shared}
 						emailed={emailed}
