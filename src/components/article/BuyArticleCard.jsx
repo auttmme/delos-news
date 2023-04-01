@@ -16,7 +16,7 @@ export default function BuyArticleCard({ url, published }) {
 		const timeDiff = Math.abs(
 			currentDate.getTime() - publicationDate.getTime()
 		);
-		const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+		const diffDays = Math.floor(timeDiff / (1000 * 3600 * 24));
 
 		let price;
 
@@ -28,6 +28,7 @@ export default function BuyArticleCard({ url, published }) {
 			price = moreThanSevenDays;
 		}
 
+		console.log("beda hari", diffDays);
 		console.log(price);
 		return setArticlePrice(price);
 	}, [published]);
