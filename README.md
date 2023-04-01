@@ -21,4 +21,4 @@ pnpm dev
 
 3. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-4. Repository: [https://delos-news-ecru.vercel.app/]
+4. Repository: https://delos-news-ecru.vercel.app/
