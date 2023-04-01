@@ -1,5 +1,5 @@
 import Layout from "@/components/common/Layout";
-import { Flex } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import ArticleList from "src/components/article/ArticleList";
 import Filter from "src/components/home/Filter";
@@ -31,12 +31,16 @@ function Home({ viewed, shared, emailed }) {
 		<Layout>
 			<Filter onCategory={handleCategory} />
 			<Flex justifyContent="center">
-				<ArticleList
-					viewed={viewed}
-					shared={shared}
-					emailed={emailed}
-					category={category}
-				/>
+				{viewed && shared && emailed ? (
+					<ArticleList
+						viewed={viewed}
+						shared={shared}
+						emailed={emailed}
+						category={category}
+					/>
+				) : (
+					<Text>Loading...</Text>
+				)}
 			</Flex>
 		</Layout>
 	);
