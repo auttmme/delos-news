@@ -10,13 +10,15 @@ function Details() {
 	const query = router.query;
 	console.log(query);
 
-	const title = query.title;
-	const author = query.author;
-	const abstract = query.abstract;
-	const published = query.published;
-	const imageSrc = query.src;
-	const imageAlt = query.alt;
-	const url = query.url;
+	const title = query?.title;
+	const author = query?.author;
+	const abstract = query?.abstract;
+	const published = query?.published;
+	const imageSrc = query?.src;
+	const imageAlt = query?.alt;
+	const url = query?.url ?? "";
+
+	console.log("id url", url);
 
 	return (
 		<Layout>
