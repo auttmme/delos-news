@@ -50,9 +50,9 @@ function MyArticle({ viewed, shared, emailed }) {
 export async function getServerSideProps() {
 	const period = 30;
 
-	const viewedUrl = `https://api.nytimes.com/svc/mostpopular/v2/viewed/${period}.json?api-key=${process.env.API_KEY}`;
-	const sharedUrl = `https://api.nytimes.com/svc/mostpopular/v2/shared/${period}.json?api-key=${process.env.API_KEY}`;
-	const emailedUrl = `https://api.nytimes.com/svc/mostpopular/v2/emailed/${period}.json?api-key=${process.env.API_KEY}`;
+	const viewedUrl = `https://api.nytimes.com/svc/mostpopular/v2/viewed/${period}.json?api-key=${process.env.NEXT_PUBLIC_API_KEY}`;
+	const sharedUrl = `https://api.nytimes.com/svc/mostpopular/v2/shared/${period}.json?api-key=${process.env.NEXT_PUBLIC_API_KEY}`;
+	const emailedUrl = `https://api.nytimes.com/svc/mostpopular/v2/emailed/${period}.json?api-key=${process.env.NEXT_PUBLIC_API_KEY}`;
 
 	const [viewedRes, sharedRes, emailedRes] = await Promise.all([
 		fetch(viewedUrl),
