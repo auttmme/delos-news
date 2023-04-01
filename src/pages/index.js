@@ -13,7 +13,7 @@ function Home({ viewed, shared, emailed }) {
 
 	const initLocalStorage = () => {
 		if (localStorage.getItem("currency") === null) {
-			localStorage.setItem("currency", "50000");
+			localStorage.setItem("currency", "100000");
 		}
 		if (localStorage.getItem("articles") === null) {
 			localStorage.setItem("articles", JSON.stringify([]));
