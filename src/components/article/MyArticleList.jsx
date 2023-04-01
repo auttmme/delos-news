@@ -26,7 +26,7 @@ export default function MyArticleList({ data }) {
 						published: data?.published_date,
 						src: data?.media?.[0]?.["media-metadata"][2].url,
 						alt: data?.caption,
-						url: data?.url,
+						url: data?.url ?? "",
 					},
 				}}
 			>
@@ -45,8 +45,8 @@ export default function MyArticleList({ data }) {
 					<Image
 									objectFit="cover"
 									maxW={{ base: "100%", sm: "200px" }}
-									src={data?.media?.[0]?.["media-metadata"][2].url}
-									alt={data.caption}
+									src={data?.media?.[0]?.["media-metadata"]?.[2]?.url}
+									alt={data?.caption}
 								/>
 					<Stack>
 						<CardBody paddingLeft={[0, 10]}>
@@ -54,11 +54,11 @@ export default function MyArticleList({ data }) {
 								{data.title}
 							</Heading>
 							<Flex py="2">
-								<Text color="gray.600">{data.byline}</Text>
+								<Text color="gray.600">{data?.byline}</Text>
 								<Text mx="3" color={"facebook.400"}>
 									&#x2022;
 								</Text>
-								<Text color="gray.600">{data.published_date}</Text>
+								<Text color="gray.600">{data?.published_date}</Text>
 							</Flex>
 						</CardBody>
 					</Stack>

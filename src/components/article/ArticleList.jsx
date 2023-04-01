@@ -11,7 +11,7 @@ import {
 	Box,
 } from "@chakra-ui/react";
 
-import NextLink from "next/link";
+import Link from "next/link";
 
 export default function ArticleList({ viewed, shared, emailed, category }) {
 	// console.log("viewed", viewed.results);
@@ -57,19 +57,21 @@ export default function ArticleList({ viewed, shared, emailed, category }) {
 	return (
 		<Box width={"full"}>
 			{selectedArticle?.map((art) => (
-				<NextLink
-					href={{
-						pathname: `/article/${art?.id}`,
-						query: {
-							title: art?.title,
-							author: art?.byline,
-							abstract: art?.abstract,
-							published: art?.published_date,
-							src: art?.media?.[0]?.["media-metadata"][2].url,
-							alt: art?.caption,
-							url: art?.url,
-						},
-					}}
+				<Link
+					href={
+						{
+							pathname: `/article/${art?.id}`,
+							query: {
+								title: `${art?.title}`,
+								author: `${art?.byline}`,
+								abstract: `${art?.abstract}`,
+								published: `${art?.published_date}`,
+								src: `${art?.media?.[0]?.["media-metadata"]?.[2]?.url}`,
+								alt: `${art?.caption}`,
+								url: `${art?.url}`,
+							},
+						} ?? {}
+					}
 				>
 					<Card
 						direction={{ base: "column", sm: "row" }}
@@ -86,13 +88,13 @@ export default function ArticleList({ viewed, shared, emailed, category }) {
 						<Image
 									objectFit="cover"
 									maxW={{ base: "100%", sm: "200px" }}
-									src={art?.media?.[0]?.["media-metadata"][2].url}
+									src={art?.media?.[0]?.["media-metadata"]?.[2]?.url}
 									alt={art?.caption}
 								/>
 						<Stack>
 							<CardBody paddingLeft={[0, 10]}>
 								<Heading as="h1" size="lg">
-									{art.title}
+									{art?.title}
 								</Heading>
 								<Flex py="2">
 									<Text color="gray.600">{art?.byline}</Text>
@@ -104,7 +106,7 @@ export default function ArticleList({ viewed, shared, emailed, category }) {
 							</CardBody>
 						</Stack>
 					</Card>
-				</NextLink>
+				</Link>
 			))}
 		</Box>
 	);

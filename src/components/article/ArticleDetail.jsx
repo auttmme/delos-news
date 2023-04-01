@@ -13,8 +13,6 @@ export default function ArticleDetail({
 	imageAlt,
 	url,
 }) {
-	console.log("data", author, published);
-
 	const [isBought, setIsBought] = useState(false);
 
 	useEffect(() => {
@@ -47,7 +45,7 @@ export default function ArticleDetail({
 				/>
 			</Flex>
 			<Text my={8}>{abstract}</Text>
-			<Link href={url}>
+			<Link href={url ?? ""}>
 				{isBought ? (
 					<Flex alignItems={"center"}>
 						<Text color="blue.800" fontSize={"xl"} fontWeight={"semibold"}>
