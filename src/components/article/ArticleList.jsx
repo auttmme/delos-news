@@ -91,13 +91,19 @@ export default function ArticleList({ viewed, shared, emailed, category }) {
 									alt={art?.caption}
 								/>
 						<Stack>
-							<CardBody paddingLeft={[0, 10]}>
+							<CardBody px={[0, 10]}>
 								<Heading as="h1" size="lg">
 									{art?.title}
 								</Heading>
-								<Flex py="2">
-									<Text color="gray.600">{art?.byline}</Text>
-									<Text mx="3" color={"facebook.400"}>
+								<Flex flexDir={["column-reverse", "row"]} py="2">
+									<Text marginTop={[1, 0]} color="gray.600">
+										{art?.byline}
+									</Text>
+									<Text
+										display={["none", "flex"]}
+										mx="3"
+										color={"facebook.400"}
+									>
 										&#x2022;
 									</Text>
 									<Text color="gray.600">{art?.published_date}</Text>

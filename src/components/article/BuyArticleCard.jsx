@@ -84,7 +84,7 @@ export default function BuyArticleCard({ url, published }) {
 			padding="4"
 			width={["full", "full", "full", "25%"]}
 			height="fit-content"
-			marginTop={["10", 0, 0, "20"]}
+			marginTop={[0, 0, 0, "20"]}
 		>
 			<Text fontSize={"xl"} align="center">
 				Buy this article to get full access

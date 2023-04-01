@@ -53,9 +53,11 @@ export default function MyArticleList({ data }) {
 							<Heading as="h1" size="lg">
 								{data.title}
 							</Heading>
-							<Flex py="2">
-								<Text color="gray.600">{data?.byline}</Text>
-								<Text mx="3" color={"facebook.400"}>
+							<Flex flexDir={["column-reverse", "row"]} py="2">
+								<Text marginTop={[1, 0]} color="gray.600">
+									{data?.byline}
+								</Text>
+								<Text display={["none", "flex"]} mx="3" color={"facebook.400"}>
 									&#x2022;
 								</Text>
 								<Text color="gray.600">{data?.published_date}</Text>
