@@ -47,6 +47,7 @@ export default function Navbar({ children }) {
 			justifyContent={"space-between"}
 			width="full"
 			alignItems="center"
+			flexDirection={["row-reverse", "row"]}
 		>
 			<IconButton
 				display={{ base: "flex", lg: "none" }}
@@ -87,6 +88,12 @@ export default function Navbar({ children }) {
 								Lucky Draw
 							</Text>
 						</Link>
+						<Flex marginTop={2} justifyContent={"center"} alignItems={"center"}>
+							<Text fontSize={"lg"} fontWeight="semibold" color="facebook.800">
+								Your balance:
+							</Text>
+							<Text marginLeft={1}>{currency}</Text>
+						</Flex>
 					</DrawerBody>
 				</DrawerContent>
 			</Drawer>
