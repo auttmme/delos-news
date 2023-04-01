@@ -13,7 +13,7 @@ function SearchPage({ viewed, shared, emailed }) {
 	const [allArticles, setAllArticles] = useState([]);
 
 	useEffect(() => {
-		setAllArticles(viewed.results.concat(shared.results, emailed.results));
+		setAllArticles(viewed?.results?.concat(shared?.results, emailed?.results));
 	}, [emailed.results, shared.results, viewed.results]);
 
 	console.log(allArticles);
