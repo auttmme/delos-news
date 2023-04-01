@@ -45,7 +45,7 @@ export default function SearchItem({ data }) {
 					<Image
 									objectFit="cover"
 									maxW={{ base: "100%", sm: "200px" }}
-									src={data?.media?.[0]?.["media-metadata"][2].url}
+									src={data?.media?.[0]?.["media-metadata"]?.[2]?.url}
 									alt={data.caption}
 								/>
 					<Stack>

@@ -13,15 +13,15 @@ function MyArticle({ viewed, shared, emailed }) {
 		setMyArticles(JSON.parse(localStorage.getItem("articles")));
 	};
 
-	const boughtArticles = allArticles.filter((allArt) =>
-		myArticles.some((myArt) => allArt.url === myArt.url)
+	const boughtArticles = allArticles?.filter((allArt) =>
+		myArticles?.some((myArt) => allArt?.url === myArt?.url)
 	);
 
 	console.log("myArticles", myArticles);
 	console.log("check", boughtArticles);
 
 	useEffect(() => {
-		setAllArticles(viewed.results.concat(shared.results, emailed.results));
+		setAllArticles(viewed?.results?.concat(shared?.results, emailed?.results));
 		getArticles();
 	}, [emailed.results, shared.results, viewed.results]);
 
@@ -40,8 +40,8 @@ function MyArticle({ viewed, shared, emailed }) {
 					My Article
 				</Text>
 			</Box>
-			{boughtArticles.map((data) => (
-				<MyArticleList key={data.id} data={data} />
+			{boughtArticles?.map((data) => (
+				<MyArticleList key={data?.id} data={data} />
 			))}
 		</Layout>
 	);
