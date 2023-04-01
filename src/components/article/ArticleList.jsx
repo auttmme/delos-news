@@ -24,7 +24,6 @@ export default function ArticleList({ viewed, shared, emailed, category }) {
 	const [mostEmailed, setMostEmailed] = useState([]);
 
 	const selectedArticle = useMemo(() => {
-		console.log("icha", category);
 		if (category.includes("all") && category.length === 4) {
 			return allArticles;
 		}
@@ -38,7 +37,7 @@ export default function ArticleList({ viewed, shared, emailed, category }) {
 		if (category.includes("most emailed")) {
 			temp = [...temp, ...mostEmailed];
 		}
-		console.log("icha", temp);
+
 		return temp;
 	}, [allArticles, category, mostEmailed, mostShared, mostViewed]);
 
