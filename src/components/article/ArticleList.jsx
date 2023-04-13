@@ -14,10 +14,6 @@ import {
 import Link from "next/link";
 
 export default function ArticleList({ viewed, shared, emailed, category }) {
-	// console.log("viewed", viewed.results);
-	// console.log("shared", shared.results);
-	// console.log("emailed", emailed.results);
-
 	const [allArticles, setAllArticles] = useState([]);
 	const [mostViewed, setMostViewed] = useState([]);
 	const [mostShared, setMostShared] = useState([]);
